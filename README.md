@@ -150,8 +150,6 @@ SECRET_KEY=your_django_secret_key_here
 DB_PASSWORD=your_postgres_password_here
 ```
 
-Ask Logan for the secret key or generate a new one at https://djecrety.ir
-
 ### 4. Set up PostgreSQL
 
 ```sql
@@ -179,7 +177,6 @@ The Mosquitto broker runs on Logan's desktop at `192.168.1.29:1883`. If developi
 ## Grow Tent
 
 - **Size:** 2ft x 4ft x 5ft
-- **Plants:** 3 strains tracked individually
 - **Sensor wiring:** Routes outside tent through grommets, only sensor tips inside
 
 ---
@@ -189,7 +186,7 @@ The Mosquitto broker runs on Logan's desktop at `192.168.1.29:1883`. If developi
 - MH-Z19C CO₂ sensor (deferred, modular add-on)
 - Automated alerts for out-of-range sensor values
 - Cost-per-gram yield analysis
-- Canopy analysis from camera imagery
+- Canopy analysis from camera imagery; pest/disease detection
 
 
 ## Notes & Blockers
