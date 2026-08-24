@@ -14,7 +14,7 @@ A full-stack IoT monitoring system for an indoor grow tent. Sensors collect envi
         |
         | WiFi / MQTT
         v
-[Mosquitto MQTT Broker] -- desktop at 192.168.1.29:1883
+[Mosquitto MQTT Broker] -- desktop
         |
         | paho-mqtt subscriber
         v
@@ -50,7 +50,7 @@ A full-stack IoT monitoring system for an indoor grow tent. Sensors collect envi
 
 ### MQTT
 
-- Broker: `192.168.1.29:1883`
+- Broker: `localhost`
 - Topic: `grow/sensors`
 - Payload format:
 
@@ -170,7 +170,7 @@ python manage.py runserver
 
 ### 7. MQTT Broker
 
-The Mosquitto broker runs on Logan's desktop at `192.168.1.29:1883`. If developing locally without access to that network, install Mosquitto locally and update `mqtt_server` in the ESP32 firmware and the Django MQTT subscriber accordingly.
+The Mosquitto broker runs on Logan's desktop at `localhost`. If developing locally without access to that network, install Mosquitto locally and update `mqtt_server` in the ESP32 firmware and the Django MQTT subscriber accordingly.
 
 ---
 
