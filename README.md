@@ -98,6 +98,22 @@ A full-stack IoT monitoring system for an indoor grow tent. Sensors collect envi
 
 ---
 
+## API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/sensors/ingest/` | Ingest sensor data from ESP32 |
+| GET | `/api/sensors/latest/` | Latest reading for all sensors |
+| GET | `/api/sensors/history/?sensor=X&hours=Y` | Historical readings for a sensor |
+
+### Sensor types
+`temperature`, `humidity`, `pressure`, `light`, `soil1`, `soil2`, `soil3`, `soil4`
+
+### Example historical query
+```
+GET /api/sensors/history/?sensor=temperature&hours=24
+```
+
 ## Project Status
 
 ### Complete ✅
@@ -105,13 +121,13 @@ A full-stack IoT monitoring system for an indoor grow tent. Sensors collect envi
 - Mosquitto broker installed and running
 - Django project scaffolded with PostgreSQL
 - All data models defined and migrated
+- MQTT subscriber - ingests sensor data into Django via REST API
+- REST API endpoints - ingest, latest readings, historical readings
 
 ### In Progress 🔨
-- MQTT subscriber — ingests sensor data into Django via REST API
-- REST API endpoints for sensor readings and grow management
+- React web dashboard with live and historical graphs
 
 ### Planned 📋
-- React web dashboard with live and historical graphs
 - React Native mobile app for remote monitoring
 - ESP32-CAM timelapse implementation
 - Journal, expense, and harvest frontend
@@ -125,7 +141,7 @@ A full-stack IoT monitoring system for an indoor grow tent. Sensors collect envi
 
 ### Prerequisites
 - Python 3.14+
-- PostgreSQL 17
+- PostgreSQL 18
 - Git
 
 ### 1. Clone the repo
@@ -167,6 +183,16 @@ python manage.py migrate
 ```bash
 python manage.py runserver
 ```
+
+### 7. Start the React Frontend
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+Opens at http://localhost:3000
 
 ### 7. MQTT Broker
 
