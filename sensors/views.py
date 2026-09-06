@@ -4,7 +4,7 @@ from datetime import timedelta
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Sensor, SensorReading
+from .models import Sensor, SensorReading, TimelapseImage
 
 class SensorDataIngestionView(APIView):
     def post(self, request):
@@ -77,3 +77,23 @@ class HistoricalReadingsView(APIView):
         ]
 
         return Response({'sensor': sensor_type, 'readings': data})
+
+class TimelapseUploadView(APIView):
+    def post(self, request):
+        image = request.FILES.get('image')
+        if not image:
+            return Response(
+                {'error': 'No image provided'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # generate unique filename with timestamp
+        timestamp = timezone.now().strftime("%Y%m%d%H%M%S")
+        image.name = f"timelapse_{timestamp}.jpg"
+        
+        timelapse = TimelapseImage.objects.create(image=image)
+        return Response({
+            'status': 'ok',
+            'timestamp': timelapse.timestamp,
+            'url': timelapse.image.url
+        }, status = status.HTTP_201_CREATED)

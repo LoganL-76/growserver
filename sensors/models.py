@@ -28,4 +28,15 @@ class SensorReading(models.Model):
 
     def __str__(self):
         return f"{self.sensor.sensor_type}: {self.value} at {self.timestamp}"
+
+
+class TimelapseImage(models.Model):
+    timestamp = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='timelapse/')
+
+    class Meta: 
+        ordering = ['-timestamp']
+
+    def __str__(self):
+        return f"Timelapse Image at {self.timestamp}"
     
