@@ -90,10 +90,24 @@ class TimelapseUploadView(APIView):
         # generate unique filename with timestamp
         timestamp = timezone.now().strftime("%Y%m%d%H%M%S")
         image.name = f"timelapse_{timestamp}.jpg"
-        
+
         timelapse = TimelapseImage.objects.create(image=image)
         return Response({
             'status': 'ok',
             'timestamp': timelapse.timestamp,
             'url': timelapse.image.url
         }, status = status.HTTP_201_CREATED)
+
+class TimelapseLatestView(APIView):
+    def get(self, request):
+        try:
+            latest = TimelapseImage.objects.latest('timestamp')
+            return Response({
+                'url': latest.image.url,
+                'timestamp': latest.timestamp
+            })
+        except TimelapseImage.DoesNotExist:
+            return Response(
+                {'error': 'No timelapse images found'},
+                status=status.HTTP_404_NOT_FOUND
+            )
