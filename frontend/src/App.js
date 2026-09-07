@@ -91,13 +91,14 @@ function TimelapseViewer() {
       .catch(err => console.error(err));
   }, []);
 
+  console.log('imageUrl:', imageUrl);
   return (
     <div className = "chart-card">
       <div className="chart-title">Latest timelapse image</div>
       {imageUrl ? (
         <>
           <img
-            src={'http://127.0.0.1:8000${imageUrl}'}
+            src={imageUrl}
             alt="Latest grow timelapse"
             className="timelapse-img"
           />
@@ -166,7 +167,7 @@ function App() {
       </section>
 
       <section className="section">
-        <h2 classname="section-title">Historical Data</h2>
+        <h2 className="section-title">Historical Data</h2>
         <div className="chart-grid">
           <SensorChart sensor="temperature" label="Temperature (°C)" color="#ff5722" />
           <SensorChart sensor="humidity" label="Humidity (%)" color="#2196f3" />
